@@ -11,6 +11,8 @@
 int main(int argc, char *argv[])
 {
 	int cents, coins = 0;
+	int values[] = {25, 10, 5, 2, 1};
+	int i;
 
 	if (argc != 2)
 	{
@@ -19,37 +21,16 @@ int main(int argc, char *argv[])
 	}
 
 	cents = atoi(argv[1]);
-
 	if (cents < 0)
 	{
 		printf("0\n");
 		return (0);
 	}
 
-	while (cents >= 25)
+	for (i = 0; i < 5 && cents > 0; i++)
 	{
-		cents -= 25;
-		coins++;
-	}
-	while (cents >= 10)
-	{
-		cents -= 10;
-		coins++;
-	}
-	while (cents >= 5)
-	{
-		cents -= 5;
-		coins++;
-	}
-	while (cents >= 2)
-	{
-		cents -= 2;
-		coins++;
-	}
-	while (cents >= 1)
-	{
-		cents -= 1;
-		coins++;
+		coins += cents / values[i];
+		cents %= values[i];
 	}
 
 	printf("%d\n", coins);
