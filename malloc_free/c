@@ -1,0 +1,28 @@
+
+========== 0-create_array.c ==========
+create_array
+
+========== 0-main.c ==========
+simple_print_buffer
+main
+
+========== 1-main.c ==========
+main
+
+========== 1-strdup.c ==========
+_strdup
+
+========== 2-main.c ==========
+main
+
+========== 2-str_concat.c ==========
+2-str_concat.c:9: WARNING: line over 80 characters (87)
+total: 0 errors, 1 warnings, 38 lines checked
+str_concat
+
+========== README.md ==========
+
+========== _putchar.c ==========
+_putchar
+
+========== main.h ==========
