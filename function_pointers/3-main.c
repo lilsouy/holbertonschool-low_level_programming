@@ -3,7 +3,11 @@
 #include <stdlib.h>
 
 /**
-	* main - performs operations
+	* main - Entry point for the calculator program
+	* @argc: number of arguments passed to the program
+	* @argv: array of strings containing the arguments
+	*
+	* Return: 0 on success, or an error code (98, 99, 100) on failure
 	*/
 int main(int argc, char *argv[])
 {

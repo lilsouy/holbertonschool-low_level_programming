@@ -2,10 +2,10 @@
 #include <stdlib.h>
 
 /**
-	* get_op_func - selects correct function
-	* @s: operator string
+	* get_op_func - Selects the correct function to perform an operation
+	* @s: operator passed as a string ("+", "-", "*", "/", "%")
 	*
-	* Return: pointer to function
+	* Return: Pointer to the corresponding function, or NULL if invalid
 	*/
 int (*get_op_func(char *s))(int, int)
 {
