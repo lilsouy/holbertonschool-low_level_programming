@@ -5,12 +5,6 @@
 
 #define BUF_SIZE 1024
 
-/**
-	* print_error_exit - print error message and exit with code
-	* @code: exit code
-	* @msg: message to print
-	* @file: file name (if needed)
-	*/
 void print_error_exit(int code, const char *msg, const char *file)
 {
 	if (file)
@@ -20,18 +14,24 @@ void print_error_exit(int code, const char *msg, const char *file)
 	exit(code);
 }
 
-/**
-	* main - copy content of one file to another
-	* @argc: argument count
-	* @argv: argument vector
-	*
-	* Return: 0 on success, exits on failure
-	*/
+void copy_file(int fd_from, int fd_to, char *file_from, char *file_to)
+{
+	ssize_t r, w;
+	char buf[BUF_SIZE];
+
+	while ((r = read(fd_from, buf, BUF_SIZE)) > 0)
+	{
+		w = write(fd_to, buf, r);
+		if (w != r)
+			print_error_exit(99, "Error: Can't write to %s\n", file_to);
+	}
+	if (r == -1)
+		print_error_exit(98, "Error: Can't read from file %s\n", file_from);
+}
+
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to;
-	ssize_t r, w;
-	char buf[BUF_SIZE];
 
 	if (argc != 3)
 		print_error_exit(97, "Usage: cp file_from file_to\n", NULL);
@@ -47,23 +47,7 @@ int main(int argc, char *argv[])
 		print_error_exit(99, "Error: Can't write to %s\n", argv[2]);
 	}
 
-	while ((r = read(fd_from, buf, BUF_SIZE)) > 0)
-	{
-		w = write(fd_to, buf, r);
-		if (w != r)
-		{
-			close(fd_from);
-			close(fd_to);
-			print_error_exit(99, "Error: Can't write to %s\n", argv[2]);
-		}
-	}
-
-	if (r == -1)
-	{
-		close(fd_from);
-		close(fd_to);
-		print_error_exit(98, "Error: Can't read from file %s\n", argv[1]);
-	}
+	copy_file(fd_from, fd_to, argv[1], argv[2]);
 
 	if (close(fd_from) == -1)
 		print_error_exit(100, "Error: Can't close fd %d\n", NULL);
