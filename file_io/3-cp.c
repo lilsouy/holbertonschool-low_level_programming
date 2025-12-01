@@ -5,6 +5,12 @@
 
 #define BUF_SIZE 1024
 
+/**
+	* print_error_exit - prints an error message and exits with a code
+	* @code: the exit code
+	* @msg: the format string for the error message
+	* @file: the file name to include in the message (can be NULL)
+	*/
 void print_error_exit(int code, const char *msg, const char *file)
 {
 	if (file)
@@ -14,6 +20,13 @@ void print_error_exit(int code, const char *msg, const char *file)
 	exit(code);
 }
 
+/**
+	* copy_file - copies content from one file descriptor to another
+	* @fd_from: file descriptor to read from
+	* @fd_to: file descriptor to write to
+	* @file_from: name of the source file (for error messages)
+	* @file_to: name of the destination file (for error messages)
+	*/
 void copy_file(int fd_from, int fd_to, char *file_from, char *file_to)
 {
 	ssize_t r, w;
@@ -29,6 +42,13 @@ void copy_file(int fd_from, int fd_to, char *file_from, char *file_to)
 		print_error_exit(98, "Error: Can't read from file %s\n", file_from);
 }
 
+/**
+	* main - copies content from one file to another
+	* @argc: number of arguments
+	* @argv: array of arguments
+	*
+	* Return: 0 on success
+	*/
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to;
